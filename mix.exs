@@ -1,13 +1,13 @@
 defmodule SortedSet.MixProject do
   use Mix.Project
-  @version "0.1.0"
+  @version "1.2.1"
   @source_url "https://github.com/boyzwj/sorted_set_nif"
 
   def project do
     [
       app: :sorted_set_nif,
       name: "SortedSet",
-      version: "1.2.1",
+      version: @version,
       elixir: "~> 1.5",
       start_permanent: Mix.env() == :prod,
       compilers: Mix.compilers(),
