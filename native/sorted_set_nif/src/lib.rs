@@ -7,7 +7,6 @@ mod supported_term;
 
 use std::sync::Mutex;
 
-use jemallocator::Jemalloc;
 use rustler::resource::ResourceArc;
 use rustler::types::tuple::get_tuple;
 use rustler::{Atom, Env, Term};
@@ -16,8 +15,6 @@ use crate::configuration::Configuration;
 use crate::sorted_set::SortedSet;
 use crate::supported_term::SupportedTerm;
 
-#[global_allocator]
-static GLOBAL_ALLOCATOR: Jemalloc = Jemalloc;
 
 mod atoms {
     rustler::atoms! {
@@ -88,7 +85,6 @@ rustler::init!(
         find_index,
         debug,
         to_list,
-        jemalloc_info::jemalloc_allocation_info,
     ],
     load = load
 );

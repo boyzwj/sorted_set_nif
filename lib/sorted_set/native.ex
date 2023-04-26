@@ -25,9 +25,7 @@ defmodule Discord.SortedSet.Native do
     crate: "sorted_set_nif",
     base_url: "#{github_url}/releases/download/v#{version}",
     force_build: System.get_env("FORCE_SORTED_SET_BUILD") in ["1", "true"],
-    targets: ["aarch64-apple-darwin", "aarch64-unknown-linux-gnu",
- "aarch64-unknown-linux-musl", "arm-unknown-linux-gnueabihf", "x86_64-apple-darwin", "x86_64-unknown-linux-gnu",
- "x86_64-unknown-linux-musl"],
+    targets: ~w(arm-unknown-linux-gnueabihf aarch64-unknown-linux-gnu aarch64-unknown-linux-musl aarch64-apple-darwin x86_64-apple-darwin x86_64-unknown-linux-gnu x86_64-unknown-linux-musl x86_64-pc-windows-gnu x86_64-pc-windows-msvc),
     nif_versions: ["2.16"],
     version: version
 
@@ -131,5 +129,5 @@ defmodule Discord.SortedSet.Native do
   def debug(_set), do: :erlang.nif_error(:nif_not_loaded)
 
 
-  def jemalloc_allocation_info(), do: :erlang.nif_error(:nif_not_loaded)
+  # def jemalloc_allocation_info(), do: :erlang.nif_error(:nif_not_loaded)
 end

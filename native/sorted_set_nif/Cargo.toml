@@ -10,6 +10,4 @@ path = "src/lib.rs"
 crate-type = ["cdylib"]
 
 [dependencies]
-jemalloc-info = "0.3"
-jemallocator = { version = "0.3.2", features = ["disable_initial_exec_tls", "stats"] }
-rustler = "0.22.0"
+rustler = "0.28.0"

@@ -327,5 +327,5 @@ defmodule Discord.SortedSet do
   @doc """
   Returns information about this NIF's memory allocations, as reported by jemalloc.
   """
-  defdelegate jemalloc_allocation_info, to: Native
+  # defdelegate jemalloc_allocation_info, to: Native
 end
