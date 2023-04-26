@@ -46,7 +46,7 @@ defmodule Discord.SortedSet.Types do
   allow the Elixir wrapper to implement both with the same underlying mechanism
   """
   @type nif_add_result ::
-          {:ok, :added, index :: integer()} | {:ok, :duplicate, index :: integer()}
+          {:ok, {:added, index :: integer()}} | {:ok, {:duplicate, index :: integer()}}
 
   @typedoc """
   Response returned from the NIF when appending a bucket.
@@ -100,7 +100,7 @@ defmodule Discord.SortedSet.Types do
   no distinction in NIF space between `remove` and `index_remove`, these more detailed response
   values allow the Elixir wrapper to implement both with the same underlying mechanism
   """
-  @type nif_remove_result :: {:ok, :removed, index :: integer()} | {:error, :not_found}
+  @type nif_remove_result :: {:ok, {:removed, index :: integer()}} | {:error, :not_found}
 
   @typedoc """
   Only a subset of Elixir types are supported by the nif, the semantic type `supported_term` can

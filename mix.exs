@@ -1,11 +1,13 @@
 defmodule SortedSet.MixProject do
   use Mix.Project
+  @version "0.1.0"
+  @source_url "https://github.com/boyzwj/sorted_set_nif"
 
   def project do
     [
       app: :sorted_set_nif,
       name: "SortedSet",
-      version: "1.2.0",
+      version: "1.2.1",
       elixir: "~> 1.5",
       start_permanent: Mix.env() == :prod,
       compilers: Mix.compilers(),
@@ -24,12 +26,13 @@ defmodule SortedSet.MixProject do
 
   defp deps do
     [
-      {:rustler, "~> 0.22.0"},
+      {:rustler_precompiled, "~> 0.6.1"},
+      {:rustler, "~> 0.28.0", optional: true},
       {:jemalloc_info, "~> 0.3", app: false},
       {:ex_doc, "~> 0.19", only: [:dev], runtime: false},
-      {:benchee, "~> 1.0", only: [:dev]},
+      {:benchee, "~> 1.1", only: [:dev]},
       {:benchee_html, "~> 1.0", only: [:dev]},
-      {:stream_data, "~> 0.4", only: [:test]},
+      {:stream_data, "~> 0.5.0", only: [:test]},
       {:dialyxir, "~> 1.0.0", only: [:dev], runtime: false}
     ]
   end
@@ -58,9 +61,7 @@ defmodule SortedSet.MixProject do
       files: ["lib", "native/sorted_set_nif/Cargo.toml", "native/sorted_set_nif/README.md", "native/sorted_set_nif/src", ".formatter.exs", "README*", "LICENSE*", "mix.exs"],
       maintainers: ["Discord Core Infrastructure"],
       licenses: ["MIT"],
-      links: %{
-        "GitHub" => "https://github.com/discord/sorted_set_nif"
-      }
+      links: %{"GitHub" => @source_url}
     ]
   end
 end

@@ -36,3 +36,4 @@ target
 
 *.iml
 .idea/
+.elixir_ls/

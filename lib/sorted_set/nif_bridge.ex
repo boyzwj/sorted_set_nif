@@ -10,8 +10,19 @@ defmodule Discord.SortedSet.NifBridge do
   directly, but for most use-cases the `Discord.SortedSet` module provides a more conventional
   interface.
   """
-  use Rustler, otp_app: :sorted_set_nif, crate: "sorted_set_nif"
-  use JemallocInfo.RustlerMixin
+#   use Rustler, otp_app: :sorted_set_nif, crate: "sorted_set_nif"
+#   use JemallocInfo.RustlerMixin
+
+  version = Mix.Project.config()[:version]
+  use RustlerPrecompiled,
+    otp_app: :sorted_set_nif,
+    crate: "sorted_set_nif",
+    base_url: "https://github.com/boyzwj/sorted_set_nif/releases/download/v#{version}",
+    force_build: System.get_env("RUSTLER_PRECOMPILATION_EXAMPLE_BUILD") in ["1", "true"],
+    targets:
+      Enum.uniq(["aarch64-unknown-linux-musl" | RustlerPrecompiled.Config.default_targets()]),
+    version: version
+
 
   alias Discord.SortedSet
   alias Discord.SortedSet.Types
@@ -47,7 +58,7 @@ defmodule Discord.SortedSet.NifBridge do
   for a safer and more ergonomic experience, use great care when calling this function directly.
   """
   @spec append_bucket(set :: SortedSet.t(), terms :: [Types.supported_term()]) ::
-          :ok | Types.nif_append_bucket_result() | Types.common_errors()
+          {:ok,:ok} | Types.nif_append_bucket_result() | Types.common_errors()
   def append_bucket(_set, _terms), do: :erlang.nif_error(:nif_not_loaded)
 
   @doc """
@@ -56,7 +67,7 @@ defmodule Discord.SortedSet.NifBridge do
   This function follows the standard Elixir naming convention, size takes O(1) time as the size
   is tracked with every addition and removal.
   """
-  @spec size(set :: SortedSet.t()) :: non_neg_integer()
+  @spec size(set :: SortedSet.t()) :: {:ok,non_neg_integer()} | Types.common_errors()
   def size(_set), do: :erlang.nif_error(:nif_not_loaded)
 
   @doc """
@@ -83,7 +94,7 @@ defmodule Discord.SortedSet.NifBridge do
   Retrieve a slice of starting at the start index and taking up to amount
   """
   @spec slice(set :: SortedSet.t(), start :: non_neg_integer(), amount :: non_neg_integer()) ::
-          [any()] | Types.common_errors()
+         {:ok, [any()]} | Types.common_errors()
   def slice(_set, _start, _amount), do: :erlang.nif_error(:nif_not_loaded)
 
   @doc """
@@ -99,7 +110,7 @@ defmodule Discord.SortedSet.NifBridge do
   Note: This is potentially an expensive operation because it must copy the NIF data back into
   BEAM VM space.
   """
-  @spec to_list(set :: SortedSet.t()) :: [any()] | Types.common_errors()
+  @spec to_list(set :: SortedSet.t()) :: {:ok,[any()]} | Types.common_errors()
   def to_list(_set), do: :erlang.nif_error(:nif_not_loaded)
 
   @doc """
