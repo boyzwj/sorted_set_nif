@@ -27,7 +27,7 @@ defmodule SortedSet.MixProject do
   defp deps do
     [
       {:rustler_precompiled, "~> 0.6.1"},
-      {:rustler, "~> 0.28.0", optional: true},
+      {:rustler, ">= 0.0.0", optional: true},
       {:jemalloc_info, "~> 0.3.0", app: false},
       {:ex_doc, "~> 0.19", only: [:dev], runtime: false},
       {:benchee, "~> 1.1", only: [:dev]},
@@ -39,10 +39,10 @@ defmodule SortedSet.MixProject do
 
   defp docs do
     [
+      main: "readme",
+      source_url: @source_url,
       name: "SortedSet",
       extras: ["README.md"],
-      main: "readme",
-      source_url: "https://github.com/discord/sorted_set"
     ]
   end
 
@@ -56,11 +56,19 @@ defmodule SortedSet.MixProject do
 
   defp package do
     [
-      name: :sorted_set_nif,
-      description: "SortedSet is a fast and efficient Rust backed sorted set.",
-      files: ["lib", "native/sorted_set_nif/Cargo.toml", "native/sorted_set_nif/README.md", "native/sorted_set_nif/src", ".formatter.exs", "README*", "LICENSE*", "mix.exs"],
       maintainers: ["Discord Core Infrastructure"],
       licenses: ["MIT"],
+      name: :sorted_set_nif,
+      description: "SortedSet is a fast and efficient Rust backed sorted set.",
+      files: ["lib",
+              "native",
+              "checksum-*.exs",
+              "priv/.gitkeep",
+              "mix.exs",
+              ".formatter.exs",
+              "README*",
+              "LICENSE*"
+              ],
       links: %{"GitHub" => @source_url}
     ]
   end

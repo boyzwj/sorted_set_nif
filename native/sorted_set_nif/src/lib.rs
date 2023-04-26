@@ -75,7 +75,7 @@ pub enum AppendBucketResult {
 }
 
 rustler::init!(
-    "Elixir.Discord.SortedSet.NifBridge",
+    "Elixir.Discord.SortedSet.Native",
     [
         empty,
         new,

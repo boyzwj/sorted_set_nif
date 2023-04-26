@@ -1,11 +1,8 @@
 # The directory Mix will write compiled artifacts to.
 /_build
 
-# The directory that rustler will write compiled artifacts to.
-/priv
-
 # The directory that rust will compile to for testing.
-/native/sorted_set_nif/target
+/native/*/target
 
 # If you run "mix test --cover", coverage assets end up here.
 /cover
@@ -37,3 +34,11 @@ target
 *.iml
 .idea/
 .elixir_ls/
+
+
+/priv/native
+
+/native/*/target
+
+# The checksum files for precompiled NIFs
+checksum-*.exs

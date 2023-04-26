@@ -1,17 +1,20 @@
-defmodule Discord.SortedSet.NifBridge do
+defmodule Discord.SortedSet.Native do
   @moduledoc """
-  `Discord.SortedSet.NifBridge` is an internal implementation detail of the NIF backed
+  `Discord.SortedSet.Native` is an internal implementation detail of the NIF backed
   `Discord.SortedSet`.
 
   This module exists to provide a clean separation between the FFI and API exposed to the end
   user, see the `Discord.SortedSet` module for the public API.
 
-  There may be advanced use cases that find it useful to use the `Discord.SortedSet.NifBridge`
+  There may be advanced use cases that find it useful to use the `Discord.SortedSet.Native`
   directly, but for most use-cases the `Discord.SortedSet` module provides a more conventional
   interface.
   """
 #   use Rustler, otp_app: :sorted_set_nif, crate: "sorted_set_nif"
 #   use JemallocInfo.RustlerMixin
+  alias Discord.SortedSet
+  alias Discord.SortedSet.Types
+
 
   version = Mix.Project.config()[:version]
   use RustlerPrecompiled,
@@ -25,8 +28,7 @@ defmodule Discord.SortedSet.NifBridge do
     version: version
 
 
-  alias Discord.SortedSet
-  alias Discord.SortedSet.Types
+
 
   @doc """
   Creates a new SortedSet.
