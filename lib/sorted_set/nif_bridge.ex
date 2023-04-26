@@ -10,18 +10,18 @@ defmodule Discord.SortedSet.NifBridge do
   directly, but for most use-cases the `Discord.SortedSet` module provides a more conventional
   interface.
   """
-#   use Rustler, otp_app: :sorted_set_nif, crate: "sorted_set_nif"
-#   use JemallocInfo.RustlerMixin
+  use Rustler, otp_app: :sorted_set_nif, crate: "sorted_set_nif"
+  use JemallocInfo.RustlerMixin
 
-  version = Mix.Project.config()[:version]
-  use RustlerPrecompiled,
-    otp_app: :sorted_set_nif,
-    crate: "sorted_set_nif",
-    base_url: "https://github.com/boyzwj/sorted_set_nif/releases/download/v#{version}",
-    force_build: System.get_env("RUSTLER_PRECOMPILATION_EXAMPLE_BUILD") in ["1", "true"],
-    targets:
-      Enum.uniq(["aarch64-unknown-linux-musl" | RustlerPrecompiled.Config.default_targets()]),
-    version: version
+#   version = Mix.Project.config()[:version]
+#   use RustlerPrecompiled,
+#     otp_app: :sorted_set_nif,
+#     crate: "sorted_set_nif",
+#     base_url: "https://github.com/boyzwj/sorted_set_nif/releases/download/v#{version}",
+#     force_build: System.get_env("RUSTLER_PRECOMPILATION_EXAMPLE_BUILD") in ["1", "true"],
+#     targets:
+#       Enum.uniq(["aarch64-unknown-linux-musl" | RustlerPrecompiled.Config.default_targets()]),
+#     version: version
 
 
   alias Discord.SortedSet

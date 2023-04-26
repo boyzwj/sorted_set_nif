@@ -28,7 +28,7 @@ defmodule SortedSet.MixProject do
     [
       {:rustler_precompiled, "~> 0.6.1"},
       {:rustler, "~> 0.28.0", optional: true},
-      {:jemalloc_info, "~> 0.3", app: false},
+      {:jemalloc_info, "~> 0.3.0", app: false},
       {:ex_doc, "~> 0.19", only: [:dev], runtime: false},
       {:benchee, "~> 1.1", only: [:dev]},
       {:benchee_html, "~> 1.0", only: [:dev]},
