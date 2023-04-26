@@ -16,14 +16,18 @@ defmodule Discord.SortedSet.Native do
   alias Discord.SortedSet.Types
 
 
-  version = Mix.Project.config()[:version]
+  mix_config = Mix.Project.config()
+  version = mix_config[:version]
+  github_url = mix_config[:package][:links]["GitHub"]
+
   use RustlerPrecompiled,
     otp_app: :sorted_set_nif,
     crate: "sorted_set_nif",
-    base_url: "https://github.com/boyzwj/sorted_set_nif/releases/download/v#{version}",
+    base_url: "#{github_url}/releases/download/v#{version}",
     force_build: System.get_env("FORCE_SORTED_SET_BUILD") in ["1", "true"],
-    targets:
-      Enum.uniq(["aarch64-unknown-linux-musl" | RustlerPrecompiled.Config.default_targets()]),
+    targets: ["aarch64-apple-darwin", "aarch64-unknown-linux-gnu",
+ "aarch64-unknown-linux-musl", "arm-unknown-linux-gnueabihf", "x86_64-apple-darwin", "x86_64-unknown-linux-gnu",
+ "x86_64-unknown-linux-musl"],
     nif_versions: ["2.16"],
     version: version
 

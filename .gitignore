@@ -36,9 +36,7 @@ target
 .elixir_ls/
 
 
-/priv/native
-
-/native/*/target
+/priv/native/*
+/native/*/target/*
 
 # The checksum files for precompiled NIFs
-checksum-*.exs
