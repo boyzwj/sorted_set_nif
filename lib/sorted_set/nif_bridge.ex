@@ -122,4 +122,7 @@ defmodule Discord.SortedSet.NifBridge do
   """
   @spec debug(set :: SortedSet.t()) :: String.t() | Types.common_errors()
   def debug(_set), do: :erlang.nif_error(:nif_not_loaded)
+
+
+  def jemalloc_allocation_info(), do: :erlang.nif_error(:nif_not_loaded)
 end
