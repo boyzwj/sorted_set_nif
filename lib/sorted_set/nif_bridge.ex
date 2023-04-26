@@ -18,9 +18,10 @@ defmodule Discord.SortedSet.NifBridge do
     otp_app: :sorted_set_nif,
     crate: "sorted_set_nif",
     base_url: "https://github.com/boyzwj/sorted_set_nif/releases/download/v#{version}",
-    force_build: System.get_env("RUSTLER_PRECOMPILATION_EXAMPLE_BUILD") in ["1", "true"],
+    force_build: System.get_env("FORCE_SORTED_SET_BUILD") in ["1", "true"],
     targets:
       Enum.uniq(["aarch64-unknown-linux-musl" | RustlerPrecompiled.Config.default_targets()]),
+    nif_versions: ["2.16"],
     version: version
 
 
